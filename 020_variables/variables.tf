@@ -17,69 +17,68 @@ Structural types:
 */
 
 # string
-variable region {
+variable "region" {
   type        = string
-  default     = "eu-ctntal-1"
+  default     = "eu-central-1"
   description = "Default AWS region."
 }
 
 # number
-variable amount_of_instances {
+variable "amount_of_instances" {
   type        = number
   default     = 1
   description = "Amount of instances which must be created"
 }
 
 # bool
-variable source_dest_check {
+variable "source_dest_check" {
   type        = bool
   default     = true
   description = "Enable sorce dest IP checking"
 }
 
 # list
-variable inbound_ports {
-  type        = list
+variable "inbound_ports" {
+  type        = list(number)
   default     = [22, 3389]
   description = "Opened ports"
 }
 
 # set
-variable sg_ids {
-  type        = set
+variable "sg_ids" {
+  type        = set(string)
   default     = []
   description = "Set of security groups"
 }
 
-
 # map
-variable tags {
-  type        = map
-  default     = {
-      "Name" = "EC2 instance",
-      "Project" = "Variables"
-      } 
+variable "tags" {
+  type = map(any)
+  default = {
+    "Name"    = "EC2 instance",
+    "Project" = "Variables"
+  }
   description = "Tegs for EC2 Instances"
 }
 
 # object
-variable ami {
-  type        = object({
-      ami_name = string,
-      virtualization_type = string,
-      owners = string
+variable "ami" {
+  type = object({
+    ami_name            = string,
+    virtualization_type = string,
+    owners              = string
   })
-  default     = {
-      ami_name = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
-      virtualization_type = "hvm"
-      owners = "099720109477"
+  default = {
+    ami_name            = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+    virtualization_type = "hvm"
+    owners              = "099720109477"
   }
   description = "Object with ami parameters"
 }
 
 # tuple
-variable add_parameters {
-  type        = tuple[bool,bool]
+variable "add_parameters" {
+  type = tuple([bool, bool])
   # hibirnate, monitoring
   default     = [false, false]
   description = "Additional parameters"
