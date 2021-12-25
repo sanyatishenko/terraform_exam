@@ -13,6 +13,14 @@ resource "aws_s3_bucket" "bucket" {
   versioning {
     enabled = var.versioning
   }
+  
+  dynamic "logging"{
+      for_each = toset(var.log_bucket != null ? [var.log_bucket] : [])
+    content {
+        target_bucket = var.log_bucket
+        target_prefix = "${var.bucket_name}/"
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "block_s3_public" {

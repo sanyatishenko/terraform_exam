@@ -31,3 +31,9 @@ variable "vpc" {
   default     = ""
   description = "Allow access for particular VPC ID."
 }
+
+variable log_bucket {
+  type        = string
+  default     = null
+  description = "Bucket for access logs."
+}

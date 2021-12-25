@@ -16,5 +16,6 @@ module "bucket" {
   source = "./s3_bucket/"
 
   bucket_name = "test-bucket-modules-0001756"
-  vpc         = "vpc-f3b06499"
+  vpc         = "vpc-f3b06423"
+  log_bucket  = "logging_bucket"
 }
