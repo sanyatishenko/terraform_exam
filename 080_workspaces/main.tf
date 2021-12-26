@@ -26,3 +26,38 @@ locals {
 output "ec2_type"{
     value =local.type
 }
+
+# terraform workspace new dev
+# terraform plan
+# Outputs: + ec2_type = "t3.micro"
+
+# terraform workspace new prod
+# terraform plan
+# Outputs: + ec2_type = "t3.small"
+
+# terraform workspace show
+#   prod
+
+# terraform workspace list
+#   default
+#   dev
+# * prod
+
+# terraform workspace select default
+# Switched to workspace "default".
+
+# terraform plan
+# Outputs: + ec2_type = "t3.nano"
+
+/*
+   .
+   |-terraform.tfstate.d
+   |---dev
+   |---prod
+*/
+
+# terraform workspace delete prod
+# Deleted workspace "prod"!
+# terraform workspace list
+# * default
+#   dev
