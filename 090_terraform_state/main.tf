@@ -5,6 +5,13 @@ terraform {
       version = " ~> 3.0"
     }
   }
+
+  backend "s3" {
+    bucket         = "terraform-state-se-bucket"
+    key            = "terraform.tfstate"
+    region         = "eu-central-1"
+    dynamodb_table = "terraform_lock"
+  }
 }
 
 
@@ -15,6 +22,15 @@ provider "aws" {
 # vpc-f3b06499
 resource "aws_vpc" "main" {
   cidr_block = "172.31.0.0/16"
+}
+
+resource "aws_subnet" "main" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "172.31.5.0/24"
+
+  tags = {
+    Name = "Main"
+  }
 }
 /*
 # terraform import aws_vpc.main vpc-f3b06499
